@@ -5,17 +5,17 @@ Flower::Flower(sf::RenderWindow *w) : window(w)
     // outer petal
     outerPetal.setRadius(50.f);
     outerPetal.setFillColor(sf::Color::Red);
-    outerPetal.setOrigin(50.f, 50.f);
+    outerPetal.setOrigin({ 50.f, 50.f });
 
     // inner center
     center.setRadius(30.f);
     center.setFillColor(sf::Color::Yellow);
-    center.setOrigin(30.f, 30.f);
+    center.setOrigin({ 30.f, 30.f });
 
     // stem
     stem.setSize(sf::Vector2f(10.f, 100.f));
     stem.setFillColor(sf::Color::Green);
-    stem.setOrigin(5.f, 5.f);
+    stem.setOrigin({ 5.f, 5.f });
 
     // leaf
     leaf.setPointCount(3);
@@ -27,14 +27,13 @@ Flower::Flower(sf::RenderWindow *w) : window(w)
     // sun
     sun.setRadius(sunSize);
     sun.setFillColor(sf::Color::Yellow);
-    sun.setOrigin(sunSize, sunSize);
-    sun.setPosition(30.f, 30.f);
+    sun.setOrigin({ sunSize, sunSize });
+    sun.setPosition({ 30.f, 30.f });
 }
 
 void Flower::updateAnimation()
 {
-    //sf::Time t = frameClock.getElapsedTime(); // for sfml 2.5.1
-    sf::Time t = frameClock.restart(); // for sfml 3.0
+    sf::Time t = frameClock.getElapsedTime();
     if (t.asMilliseconds() > 100)
     {
         if (shrink)
@@ -54,9 +53,9 @@ void Flower::updateAnimation()
             }
         }
         sun.setRadius(sunSize);
-        sun.setOrigin(sunSize, sunSize);
+        sun.setOrigin({ sunSize, sunSize });
         
-        //frameClock.restart(); // for sfml 2.5.1
+        frameClock.restart();
     }
 }
 
@@ -68,10 +67,10 @@ void Flower::mydraw(sf::Vector2f pos)
 
     window->draw(sun);
 
-    stem.setPosition(pos.x, pos.y + 50.f);
+    stem.setPosition({ pos.x, pos.y + 50.f });
     window->draw(stem);
 
-    leaf.setPosition(pos.x + 5.f, pos.y + 80.f);
+    leaf.setPosition({ pos.x + 5.f, pos.y + 80.f });
     window->draw(leaf);
 
     outerPetal.setPosition(pos);
